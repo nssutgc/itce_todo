@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('tasks', [
         'tasks' => App\Task::latest()->get()
     ]);
- });
+});
 
 Route::post('/task', function (Request $request) {
     request()->validate(
@@ -35,8 +35,9 @@ Route::post('/task', function (Request $request) {
     $task->name = request('name');
     $task->save();
     return redirect('/');
- });
+});
 
-Route::delete('/task/{task}', function () {
-    //
+Route::delete('/task/{task}', function (Task $task) {
+    $task->delete();
+    return redirect('/');
 });
