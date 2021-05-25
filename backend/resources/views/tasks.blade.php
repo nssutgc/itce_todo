@@ -16,6 +16,7 @@
          @csrf
          <div class="form-group">
            <input type="text" name="name" class="form-control">
+           <input type="time" name="time" class="form-control">
            @if ($errors->has('name'))
            <p class="text-danger">{{ $errors->first('name') }}</p>
            @endif
