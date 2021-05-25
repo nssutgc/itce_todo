@@ -36,6 +36,10 @@
             <td>
               <form method="POST" action="{{ url('/task/' . $task->id) }}">
                 @csrf
+                <?php
+                    $date = new DateTime('now');
+                    echo $date->format('Y年m月d日 H時i分s秒');
+                ?>
                 @method('DELETE')
                 <button type="submit" class="btn btn-outline-danger" style="width: 100px;"><i class="far fa-trash-alt"></i> 削除</button>
               </form>
