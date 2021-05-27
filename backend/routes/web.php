@@ -34,6 +34,8 @@ Route::post('/task', function (Request $request) {
     );
     $task = new Task();
     $task->name = request('name');
+    $task->deadline_at = request('time');
+    $task->deadline_at = strtotime($task->deadline_at);
     $task->save();
     return redirect('/');
 });

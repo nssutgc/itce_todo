@@ -15,7 +15,8 @@
        <form method="POST" action="{{ url('/task') }}">
          @csrf
          <div class="form-group">
-           <input type="text" name="name" class="form-control">
+           タスク<input type="text" name="name" class="form-control">
+           期限<input type="datetime-local" name="time" class="form-control">
            @if ($errors->has('name'))
            <p class="text-danger">{{ $errors->first('name') }}</p>
            @endif
@@ -33,7 +34,12 @@
           @foreach ($tasks as $task)
           <tr>
             <td>{{ $task->name }}</td>
-            <td>{{ $task->created_at->format('Y/m/d H:i') }}</td>
+            <td>{{ $task->created_at->format("Y/m/d H:i") }}</td>
+            @if (strtotime($task->deadline_at) > strtotime('now'))
+            <td>期限　{{ $task->deadline_at->format("Y/m/d H:i") }}</td>
+            @else
+            <td class="dead">期限切れ</td>
+            @endif
             <td>
               <form method="POST" action="{{ url('/task/' . $task->id) }}">
                 @csrf
